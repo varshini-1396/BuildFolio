@@ -1,4 +1,4 @@
-# Varshini Avula – Hackathon Portfolio
+# BuildFolio – Hackathon Portfolio
 
 ![Hackathon Badge](https://img.shields.io/badge/Built%20in-24%20Hours-blueviolet?style=flat-square&logo=hackathon)
 
