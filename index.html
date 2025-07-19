@@ -25,6 +25,10 @@
                 <a href="#contact">Contact</a>
                 <a href="#resume">Resume</a>
             </div>
+            <!-- Move the toggle button outside nav-links for better accessibility -->
+            <button id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
+                <span id="themeIcon" class="fas fa-moon"></span>
+            </button>
             <div class="hamburger" id="hamburger">
                 <div class="line1"></div>
                 <div class="line2"></div>
@@ -52,7 +56,7 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="my-image.jpg" alt="Image">
+                    <img src="images.jpeg" alt="Image">
                 </div>
                 <div class="about-text">
                     <p>I'm a Computer Science Engineering student at IIITDM Kancheepuram. I enjoy coding, problem-solving, and building creative solutions.</p>
@@ -64,7 +68,7 @@
     </section>
     
     <!-- Experience Section -->
-    <section id="experience" class="section experience-section">
+    <section id="experience" class="experience-section" style="background:none;background-color:transparent;">
         <div class="container">
             <h2 class="section-title">Experience</h2>
             <div class="experience-timeline">
@@ -442,19 +446,7 @@
         <div class="container">
             <h2 class="section-title">Certifications</h2>
             <div class="certifications-grid">
-                <div class="certification-card">
-                    <div class="certification-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <div class="certification-content">
-                        <h3>Data Analytics & Visualization</h3>
-                        <p class="certification-issuer">Accenture North America</p>
-                        <p class="certification-date">March 2025</p>
-                        <p class="certification-description">Completed a comprehensive job simulation focused on data analytics, visualization, and strategic recommendations using real-world business scenarios.</p>
-                        <a href="certificates/accenture-job-simulation.pdf" class="certification-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-
+                
                 <div class="certification-card">
                     <div class="certification-icon">
                         <i class="fas fa-certificate"></i>
@@ -491,6 +483,19 @@
                         <p class="certification-date">May 2025</p>
                         <p class="certification-description">Learned web development fundamentals including HTML structure, CSS styling, and JavaScript programming for interactive web applications.</p>
                         <a href="certificates/Coursera_TG8N8Y3VQPOM.pdf" class="certification-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3>Data Analytics & Visualization</h3>
+                        <p class="certification-issuer">Accenture North America</p>
+                        <p class="certification-date">March 2025</p>
+                        <p class="certification-description">Completed a comprehensive job simulation focused on data analytics, visualization, and strategic recommendations using real-world business scenarios.</p>
+                        <a href="certificates/accenture-job-simulation.pdf" class="certification-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
             </div>

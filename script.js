@@ -1,3 +1,60 @@
+// Theme Management
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const body = document.body;
+
+function setTheme(mode) {
+  if (mode === 'light') {
+    document.body.classList.add('light-mode');
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+  } else {
+    document.body.classList.remove('light-mode');
+    themeIcon.classList.remove('fa-sun');
+    themeIcon.classList.add('fa-moon');
+  }
+  localStorage.setItem('theme', mode);
+}
+
+themeToggle.addEventListener('click', function() {
+  const isLight = document.body.classList.contains('light-mode');
+  setTheme(isLight ? 'dark' : 'light');
+});
+
+// On page load, set theme from localStorage (default to dark)
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+  setTheme('light');
+} else {
+  setTheme('dark');
+}
+
+// Theme toggle functionality
+themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Update particles color based on theme
+    updateParticlesColor(newTheme);
+});
+
+// Update particles color based on theme
+function updateParticlesColor(theme) {
+    if (window.pJSDom && window.pJSDom[0]) {
+        const particles = window.pJSDom[0].pJS.particles;
+        const newColor = theme === 'light' ? '#8A2BE2' : '#8A2BE2';
+        
+        particles.color.value = newColor;
+        particles.line_linked.color = newColor;
+        
+        // Refresh particles
+        window.pJSDom[0].pJS.fn.particlesRefresh();
+    }
+}
+
 // Navbar scroll effect
 window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
@@ -28,6 +85,9 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 // Particles.js configuration
 document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('particles-js')) {
+        const currentTheme = body.getAttribute('data-theme');
+        const particleColor = currentTheme === 'light' ? '#8A2BE2' : '#8A2BE2';
+        
         particlesJS('particles-js', {
             particles: {
                 number: {
@@ -38,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 },
                 color: {
-                    value: '#8A2BE2'
+                    value: particleColor
                 },
                 shape: {
                     type: 'circle',
@@ -51,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 },
                 opacity: {
-                    value: 0.5,
+                    value: currentTheme === 'light' ? 0.3 : 0.5,
                     random: false,
                     anim: {
                         enable: false,
@@ -73,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: '#8A2BE2',
-                    opacity: 0.4,
+                    color: particleColor,
+                    opacity: currentTheme === 'light' ? 0.2 : 0.4,
                     width: 1
                 },
                 move: {
@@ -142,9 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (progressContainer) {
         observer.observe(progressContainer);
     }
-    
-   
-    
     
     // Resume download (simulated)
     const downloadResume = document.getElementById('downloadResume');
@@ -342,7 +399,7 @@ function showNotification(message, type = 'success') {
 
     // Create new notification
     const notification = document.createElement('div');
-    notification.className = 'notification';
+    notification.className = `notification ${type}`;
     
     // Add icon based on type
     const icon = document.createElement('i');
@@ -494,3 +551,46 @@ window.onclick = function(event) {
         closeEducationModal();
     }
 }
+
+// Intersection Observer for animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Handle progress bar animation
+            if (entry.target.classList.contains('progress-container')) {
+                const progressBar = entry.target.querySelector('.progress-bar');
+                if (progressBar) {
+                    // Get the width from the style attribute
+                    const targetWidth = progressBar.style.width;
+                    progressBar.style.width = '0%';
+                    setTimeout(() => {
+                        progressBar.style.width = targetWidth;
+                    }, 500);
+                }
+            }
+        }
+    });
+}, {
+    threshold: 0.2,
+    rootMargin: '0px'
+});
+
+// Theme transition effects
+document.addEventListener('DOMContentLoaded', function() {
+    // Add theme transition class to body
+    body.classList.add('theme-transition');
+    
+    // Remove transition class after initial load
+    setTimeout(() => {
+        body.classList.remove('theme-transition');
+    }, 100);
+});
+
+// Add smooth theme transition
+const style = document.createElement('style');
+style.textContent = `
+    .theme-transition * {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+    }
+`;
+document.head.appendChild(style);
